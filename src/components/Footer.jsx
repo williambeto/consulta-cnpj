@@ -1,3 +1,4 @@
+import { GitHub } from './Icons';
 import styles from './Footer.module.css';
 
 export default function Footer() {
@@ -13,6 +14,27 @@ export default function Footer() {
       </div>
       <div className={`container ${styles.badgeRow}`}>
         <a
+          href="https://github.com/williambeto/consulta-cnpj"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.badge}
+          aria-label="Codigo fonte no GitHub"
+        >
+          <GitHub />
+          github.com/williambeto/consulta-cnpj
+        </a>
+        <span className={styles.badgeSep} aria-hidden="true">·</span>
+        <a
+          href="https://github.com/williambeto"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.badge}
+          aria-label="Perfil de @williambeto no GitHub"
+        >
+          @williambeto
+        </a>
+        <span className={styles.badgeSep} aria-hidden="true">·</span>
+        <a
           href="https://ai-workflow-kit-site.pages.dev/"
           target="_blank"
           rel="noopener noreferrer"
@@ -24,7 +46,7 @@ export default function Footer() {
             <path d="M2 17l10 5 10-5" />
             <path d="M2 12l10 5 10-5" />
           </svg>
-          Desenvolvido com AI Workflow Kit
+          AI Workflow Kit
         </a>
       </div>
     </footer>

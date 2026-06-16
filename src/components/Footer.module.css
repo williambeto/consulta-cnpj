@@ -17,6 +17,7 @@ footer { padding: 22px 0 38px; }
   opacity: 0.62; transition: opacity 0.2s ease, color 0.2s ease;
 }
 .badge:hover { opacity: 1; color: var(--primary); }
+.badgeSep { color: var(--border); margin: 0 4px; font-size: 0.78rem; opacity: 0.5; }
 
 @media (max-width: 680px) {
   .footerRow { align-items: flex-start; flex-direction: column; }

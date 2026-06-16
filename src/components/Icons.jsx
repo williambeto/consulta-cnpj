@@ -64,3 +64,12 @@ export function Store() {
     </svg>
   );
 }
+
+export function GitHub() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M15 21v-4a2.7 2.7 0 0 0-.8-2.1c2.7-.3 5.5-1.3 5.5-6a4.8 4.8 0 0 0-1.3-3.3 4.5 4.5 0 0 0-.1-3.3s-1-.3-3.4 1.3a11.6 11.6 0 0 0-6.2 0C6.3 2.1 5.2 2.5 5.2 2.5a4.6 4.6 0 0 0-.1 3.3 4.8 4.8 0 0 0-1.3 3.3c0 4.6 2.8 5.6 5.5 6A2.7 2.7 0 0 0 8.6 17v4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M9 19c-2 .6-3.5-.5-4-1" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
