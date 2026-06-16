@@ -7,6 +7,16 @@ footer { padding: 22px 0 38px; }
 .footerLinks { display: flex; gap: 18px; }
 .footerLinks a { color: var(--text-soft); text-decoration: none; transition: color 0.2s ease; }
 .footerLinks a:hover { color: var(--text); }
+.badgeRow {
+  margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--border);
+  text-align: center;
+}
+.badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--text-soft); font-size: 0.78rem; text-decoration: none;
+  opacity: 0.62; transition: opacity 0.2s ease, color 0.2s ease;
+}
+.badge:hover { opacity: 1; color: var(--primary); }
 
 @media (max-width: 680px) {
   .footerRow { align-items: flex-start; flex-direction: column; }
