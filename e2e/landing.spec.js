@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Consulta CNPJ Landing Page', () => {
+test.describe('CNPJ Facil Landing Page', () => {
 
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
   });
 
   test('should render the page title', async ({ page }) => {
-    await expect(page).toHaveTitle(/Consulta CNPJ/);
+    await expect(page).toHaveTitle(/CNPJ Fácil/);
   });
 
   test('should render the main heading', async ({ page }) => {
@@ -94,7 +94,7 @@ test.describe('Consulta CNPJ Landing Page', () => {
     await page.reload();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
     // Clean up
-    await page.evaluate(() => localStorage.removeItem('consulta-cnpj-theme'));
+    await page.evaluate(() => localStorage.removeItem('cnpj-facil-theme'));
   });
 
   test('should have CSP meta tag', async ({ page }) => {

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Landing page de consulta de CNPJ — produto ficticio para demonstracao",
+  "description": "CNPJ Facil — landing page de consulta de CNPJ. Produto ficticio para demonstracao.",
   "license": "MIT",
   "scripts": {
     "dev": "vite",

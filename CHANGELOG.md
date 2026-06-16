@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the Consulta CNPJ landing page project.
+All notable changes to the CNPJ Fácil landing page project.
 
 ## [1.0.0] — 2026-06-16
 

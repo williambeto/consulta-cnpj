@@ -6,11 +6,11 @@ export default function Nav({ theme, onToggleTheme }) {
     <header className={styles.siteHeader}>
       <div className="container">
         <nav className={styles.nav} aria-label="Navegacao principal">
-          <a className={styles.brand} href="#inicio" aria-label="Consulta CNPJ — pagina inicial">
+          <a className={styles.brand} href="#inicio" aria-label="CNPJ Fácil — pagina inicial">
             <span className={styles.brandMark} aria-hidden="true">
               <Building />
             </span>
-            <span>Consulta CNPJ</span>
+            <span>CNPJ Fácil</span>
           </a>
 
           <div className={styles.navLinks}>

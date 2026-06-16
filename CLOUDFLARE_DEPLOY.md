@@ -1,6 +1,6 @@
 # Deploy no Cloudflare Pages
 
-Este documento descreve como publicar o projeto **Consulta CNPJ** no **Cloudflare Pages** (pages.dev).
+Este documento descreve como publicar o projeto **CNPJ Fácil** no **Cloudflare Pages** (pages.dev).
 
 ---
 
@@ -52,7 +52,7 @@ O CSP também está como `<meta>` tag no HTML como defesa em profundidade.
 
 | Campo | Valor |
 |-------|-------|
-| **Production branch** | `feat/landing-page-cnpj` |
+| **Production branch** | `main` |
 | **Build command** | `npm run build` |
 | **Build output directory** | `dist` |
 | **Root directory** | `/` |
@@ -62,10 +62,10 @@ O CSP também está como `<meta>` tag no HTML como defesa em profundidade.
 O deploy leva ~1-2 minutos. Após concluído, o site estará disponível em:
 
 ```
-https://consulta-cnpj.pages.dev
+https://cnpj-facil.pages.dev
 ```
 
-> **Nota:** O subdomínio `consulta-cnpj.pages.dev` será gerado automaticamente. Você pode configurar um domínio personalizado depois.
+> **Nota:** O subdomínio `cnpj-facil.pages.dev` será gerado automaticamente. Você pode configurar um domínio personalizado depois.
 
 ---
 
@@ -79,11 +79,11 @@ npm install -g wrangler
 wrangler login
 
 # Deploy
-npx wrangler pages deploy dist --project-name=consulta-cnpj
+npx wrangler pages deploy dist --project-name=cnpj-facil
 
 # Ou criar o projeto primeiro (se for a primeira vez)
-npx wrangler pages project create consulta-cnpj --production-branch=feat/landing-page-cnpj
-npx wrangler pages deploy dist --project-name=consulta-cnpj
+npx wrangler pages project create consulta-cnpj --production-branch=main
+npx wrangler pages deploy dist --project-name=cnpj-facil
 ```
 
 ---
@@ -97,7 +97,7 @@ name: Deploy to Cloudflare Pages
 
 on:
   push:
-    branches: [feat/landing-page-cnpj]
+    branches: [main]
 
 jobs:
   deploy:
@@ -116,7 +116,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: consulta-cnpj
+          projectName: cnpj-facil
           directory: dist
 ```
 
@@ -132,22 +132,22 @@ Após o deploy, confirme que tudo funciona:
 
 ```bash
 # 1. Site no ar
-curl -I https://consulta-cnpj.pages.dev
+curl -I https://cnpj-facil.pages.dev
 
 # 2. Headers de segurança
-curl -I https://consulta-cnpj.pages.dev | grep -E "x-frame-options|content-security-policy|x-content-type-options"
+curl -I https://cnpj-facil.pages.dev | grep -E "x-frame-options|content-security-policy|x-content-type-options"
 
 # 3. CSP ativo como HTTP header
-curl -s https://consulta-cnpj.pages.dev | grep "Content-Security-Policy"
+curl -s https://cnpj-facil.pages.dev | grep "Content-Security-Policy"
 
 # 4. Páginas estáticas acessíveis
-curl -s -o /dev/null -w "%{http_code}" https://consulta-cnpj.pages.dev/privacidade.html
-curl -s -o /dev/null -w "%{http_code}" https://consulta-cnpj.pages.dev/termos.html
-curl -s -o /dev/null -w "%{http_code}" https://consulta-cnpj.pages.dev/lgpd.html
+curl -s -o /dev/null -w "%{http_code}" https://cnpj-facil.pages.dev/privacidade.html
+curl -s -o /dev/null -w "%{http_code}" https://cnpj-facil.pages.dev/termos.html
+curl -s -o /dev/null -w "%{http_code}" https://cnpj-facil.pages.dev/lgpd.html
 
 # 5. Teste de frame-busting (deve bloquear iframe)
 # Abra o console do navegador em outro site e tente:
-# document.body.innerHTML = '<iframe src="https://consulta-cnpj.pages.dev"></iframe>'
+# document.body.innerHTML = '<iframe src="https://cnpj-facil.pages.dev"></iframe>'
 # O frame-busting deve redirecionar ou o X-Frame-Options deve bloquear
 ```
 
@@ -158,7 +158,7 @@ curl -s -o /dev/null -w "%{http_code}" https://consulta-cnpj.pages.dev/lgpd.html
 Nenhuma variável de ambiente é necessária. O projeto é 100% estático e não consome APIs externas.
 
 Se futuramente quiser adicionar uma API real de consulta CNPJ, configure em:
-**Cloudflare Dashboard → Pages → consulta-cnpj → Settings → Environment variables**
+**Cloudflare Dashboard → Pages → cnpj-facil → Settings → Environment variables**
 
 ---
 

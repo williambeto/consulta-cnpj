@@ -1,6 +1,6 @@
-# Processo de desenvolvimento — Consulta CNPJ
+# Processo de desenvolvimento — CNPJ Fácil
 
-Este documento descreve o processo completo de desenvolvimento da landing page **Consulta CNPJ** utilizando o **AI Workflow Kit v2.2.7** como orquestrador de fluxo de trabalho, agentes especializados e validação automatizada.
+Este documento descreve o processo completo de desenvolvimento da landing page **CNPJ Fácil** utilizando o **AI Workflow Kit v2.2.7** como orquestrador de fluxo de trabalho, agentes especializados e validação automatizada.
 
 O objetivo é servir como **evidência reprodutível** de que o AI Workflow Kit entrega software funcional, testado e auditado seguindo um fluxo proporcional e seguro.
 
@@ -10,11 +10,12 @@ O objetivo é servir como **evidência reprodutível** de que o AI Workflow Kit 
 
 | Item | Valor |
 |------|-------|
-| Produto | Landing page de consulta fictícia de CNPJ |
+| Produto | CNPJ Fácil — landing page de consulta fictícia de CNPJ |
 | Stack final | React 18 + Vite 5 + CSS Modules |
 | Testes | 20 testes E2E com Playwright |
 | Modo AI Workflow | `full` (especificação → implementação → validação independente → release) |
 | Repositório | https://github.com/williambeto/consulta-cnpj |
+| Site publicado | https://cnpj-facil.pages.dev/ |
 | Site do AI Workflow Kit | https://ai-workflow-kit-site.pages.dev/ |
 
 ---
@@ -211,6 +212,7 @@ Adicionado ao `Footer.jsx` um selo com link para o site do AI Workflow Kit:
 
 ```
 Desenvolvido com AI Workflow Kit  →  https://ai-workflow-kit-site.pages.dev/
+- **Site publicado:** https://cnpj-facil.pages.dev/
 ```
 
 ---

@@ -12,7 +12,7 @@ function assert(condition, message) {
 }
 
 function run() {
-  console.log('=== Consulta CNPJ — Landing Page Validation ===\n');
+  console.log('=== CNPJ Fácil — Landing Page Validation ===\n');
 
   // ---- 1. File integrity ----
   assert(fs.existsSync(filePath), 'index.html exists');
@@ -25,7 +25,7 @@ function run() {
   assert(/<meta[^>]*charset=["']UTF-8["']/.test(html), 'charset UTF-8');
   assert(/<meta[^>]*viewport/.test(html), 'viewport meta');
   assert(/<meta[^>]*description/.test(html), 'meta description for SEO');
-  assert(/<title[^>]*>Consulta CNPJ/.test(html), 'title contains brand name');
+  assert(/<title[^>]*>CNPJ Fácil/.test(html), 'title contains brand name');
 
   // ---- 3. Semantic landmarks ----
   assert(/<header\b[^>]*class="site-header"/.test(html), '<header> with site-header class');
@@ -43,7 +43,7 @@ function run() {
   assert(/transition:.*background.*color/.test(html), 'smooth theme transition');
 
   // ---- 5. Branding ----
-  assert(/Consulta CNPJ/.test(html), 'brand name present');
+  assert(/CNPJ Fácil/.test(html), 'brand name present');
   assert(/CNPJ/.test(html), 'CNPJ keyword present');
 
   // ---- 6. Glassmorphism & visual polish ----
