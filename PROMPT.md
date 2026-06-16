@@ -1,294 +1,110 @@
-# Prompt: Recriar o site CNPJ Fácil do zero com AI Workflow Kit
+# CNPJ Fácil — Especificação
 
-> Para referência, o resultado final está publicado em https://cnpj-facil.pages.dev/
-> e o código fonte em https://github.com/williambeto/consulta-cnpj
+## O que é
 
----
+Uma landing page para um produto fictício chamado **CNPJ Fácil** — interface de consulta de dados cadastrais de empresas brasileiras por CNPJ.
 
-## Instrução principal
-
-Você vai criar uma landing page completa para um produto fictício chamado **CNPJ Fácil** — uma interface de consulta de dados cadastrais de CNPJ. O trabalho será feito em etapas, usando o **AI Workflow Kit v2.2.7** como orquestrador. Ao final, o site estará publicado no Cloudflare Pages.
+O site de referência está publicado em https://cnpj-facil.pages.dev/ e o código em https://github.com/williambeto/consulta-cnpj.
 
 ---
 
-## Regras absolutas (não negociáveis)
+## Requisitos de produto
 
-1. **Nunca commitar direto no `main`.** Use branch de feature (`feat/landing-page-cnpj`) e depois faça merge.
-2. **Toda etapa com escrita deve ter validação observável** — build, teste, ou comando que confirme o resultado.
-3. **Nunca reportar sucesso se a validação falhou.**
-4. **Idioma:** todo o conteúdo visível do site em português (pt-BR). Código e documentação podem usar termos técnicos em inglês.
-5. **Zero dependências externas em runtime** — apenas React e CSS Modules. Nada de Tailwind, Bootstrap, styled-components, Google Fonts, CDNs.
-6. **Dados fictícios:** todas as empresas e CNPJs são simulados. Nenhum CNPJ real da Receita Federal.
-7. **LGPD compliance:** páginas de privacidade, termos de uso e direitos do titular.
+### Conteúdo e seções
+
+O site deve conter:
+
+- **Navegação** com a marca "CNPJ Fácil", links internos para as seções principais e um botão de chamada para consulta.
+- **Hero** com headline, subtítulo, botão de ação principal e três selos de confiança (consulta gratuita, sem cadastro, dados públicos).
+- **Campo de busca de CNPJ** com input para 14 dígitos, label acessível, placeholder de exemplo e botão de consulta.
+- **Faixa de confiança** com três indicadores numéricos (CNPJs indexados, tempo de resposta, foco em dados públicos).
+- **Seção de funcionalidades** com três cards descrevendo os diferenciais do produto.
+- **Seção "Como funciona"** com três passos numerados explicando o fluxo de uso.
+- **Tabela de planos e preços** com três níveis (gratuito, profissional, empresarial), cada um com lista de recursos e botão de ação. O plano do meio deve ter destaque visual.
+- **Chamada para ação final** com headline e botão.
+- **Aviso legal** informando que o produto é fictício, criado para demonstração, e que dados de consulta não são armazenados. Deve mencionar o uso de armazenamento local apenas para preferência de tema.
+- **Rodapé** com copyright, links para páginas legais e crédito de desenvolvimento.
+
+### Funcionalidades
+
+- **Validação de CNPJ** usando o algoritmo módulo-11 oficial da Receita Federal (dois dígitos verificadores com pesos específicos).
+- **Busca em base de dados simulada** contendo exatamente 7 empresas fictícias. Nenhum CNPJ real.
+- **Exibição do resultado** da busca mostrando: razão social, nome fantasia, situação cadastral, data de abertura, CNAE principal, município e UF.
+- **Feedback de erro** acessível quando o CNPJ for inválido, vazio, com formato incorreto ou não encontrado.
+- **Modo escuro/claro** com toggle persistente e respeito à preferência do sistema operacional.
+
+### Empresas fictícias obrigatórias
+
+| CNPJ | Razão Social | UF |
+|------|-------------|-----|
+| 12.345.678/0001-90 | Aurora Tecnologia Brasileira Ltda. | SP |
+| 98.765.432/0001-10 | Construtora Nova Era S.A. | RJ |
+| 45.678.901/0001-23 | Comercial Alimenta Brasil Ltda. | MG |
+| 78.901.234/0001-56 | Transportes Rota Certa Eireli | PR |
+| 32.165.498/0001-77 | Gráfica Expresso Digital Ltda. | RS |
+| 65.498.732/0001-88 | Clínica Bem Estar S.S. Ltda. | BA |
+| 14.725.836/0001-99 | Tech Solutions Nordeste S.A. | PE |
+
+Dados completos (situação, data de abertura, CNAE, nome fantasia) disponíveis no repositório de referência.
 
 ---
 
-## Etapa 1: Inicialização do projeto
+## Restrições técnicas
+
+- **Idioma:** todo conteúdo visível em português brasileiro (pt-BR).
+- **Dependências de runtime:** React. Nada de Tailwind, Bootstrap, styled-components, Google Fonts, CDNs ou bibliotecas de componentes.
+- **Build:** Vite.
+- **Estilização:** CSS Modules com variáveis CSS (custom properties) para o design system.
+- **Segurança:** sem `innerHTML` com dados dinâmicos. Política de Segurança de Conteúdo (CSP) restritiva. Proteção contra clickjacking.
+- **Acessibilidade:** labels associadas a inputs, feedback com região live, atributos aria em controles interativos, respeito a `prefers-reduced-motion`.
+- **LGPD:** páginas estáticas de política de privacidade, termos de uso e direitos do titular.
+- **Dados:** todo CNPJ e empresa são fictícios. Nenhum dado da Receita Federal.
+- **Branch:** nunca commitar direto em `main`. Usar branch de feature.
+- **Git:** sem `--force`, sem amend de commits já publicados, sem commits vazios.
+
+---
+
+## Qualidade visual
+
+- Design com glassmorphism (transparência com desfoque de fundo), sombras suaves, bordas arredondadas.
+- Paleta clara: fundo `#f7f8fc`, texto `#101426`, cor primária `#2357ff`.
+- Paleta escura: fundo `#080b14`, superfície translúcida, cor primária `#7593ff`.
+- Tipografia system-ui com headings em peso elevado e letter-spacing negativo.
+- Responsivo: funcionar corretamente em mobile (375px), tablet (768px) e desktop (1280px+).
+- Ícones SVG inline sem bibliotecas externas.
+- Transições suaves em hover (transform, sombra, cor).
+
+---
+
+## Validação
+
+### Testes automatizados obrigatórios
+
+O projeto deve incluir testes E2E executáveis com um único comando que cubram:
+
+1. Renderização das seções principais (hero, features, pricing, confiança).
+2. Busca de CNPJ: válido retorna dados, inválido mostra erro, vazio mostra validação, formato incorreto mostra erro.
+3. Modo escuro: toggle funciona, persiste em localStorage, respeita preferência do sistema.
+4. Acessibilidade: labels em inputs, aria-live em feedback, aria-label em controles.
+5. Responsividade: três larguras de viewport sem quebra de layout.
+6. Segurança: CSP presente, proteção contra iframe ativa.
+
+### Critérios de aceitação
 
 ```bash
-mkdir cnpj-facil && cd cnpj-facil
-git init
-npm init -y
-npm install @williambeto/ai-workflow@2.2.7
-npx ai-workflow init
-```
-
-O `package.json` deve ficar com:
-```json
-"name": "consulta-cnpj",
-"version": "1.0.0",
-"private": true,
-"type": "module"
+npm run build          # build de produção sem erros
+npm test               # todos os testes E2E passando
 ```
 
 ---
 
-## Etapa 2: Single-file HTML (protótipo funcional)
+## Entrega
 
-Crie um arquivo `index.html` autossuficiente com:
-
-### Seções obrigatórias
-- **Nav:** logo "CNPJ Fácil" + links âncora (Benefícios, Como funciona, Planos) + botão "Consultar CNPJ"
-- **Hero:** headline "Consulte um CNPJ em poucos segundos." + subtítulo + CTA "Fazer consulta gratuita" + 3 selos (Consulta gratuita, Sem cadastro, Dados públicos)
-- **SearchCard:** input de 14 dígitos com label "CNPJ da empresa", placeholder "12.345.678/0001-90", botão "Consultar"
-- **TrustStrip:** "50 mi+ CNPJs indexados", "< 1 s tempo médio de resposta", "100% foco em dados públicos"
-- **Features:** 3 cards (Consulta objetiva, Experiência segura, Dados compreensíveis)
-- **HowItWorks:** 3 passos numerados (01 Digite o CNPJ, 02 Validamos o formato, 03 Analise os dados)
-- **Pricing:** 3 planos — Grátis (R$0/mês, 10 consultas/dia), Profissional (R$79/mês, 500 consultas/dia, destaque "MAIS POPULAR"), Empresarial (R$249/mês, ilimitado)
-- **CTA Section:** "Mais clareza antes de fechar negócio." + botão "Consultar agora"
-- **Disclaimer:** "Este é um produto fictício criado para fins de demonstração."
-- **Footer:** © 2026 CNPJ Fácil + links Privacidade, Termos de uso, LGPD
-
-### Funcionalidades obrigatórias
-- **Validação de CNPJ** usando o algoritmo módulo-11 oficial (pesos 5,4,3,2,9,8,7,6,5,4,3,2 para o primeiro dígito e 6,5,4,3,2,9,8,7,6,5,4,3,2 para o segundo)
-- **Mock database** com 7 empresas fictícias:
-
-```js
-const MOCK_DATABASE = [
-  { cnpj: '12345678000190', razao_social: 'Aurora Tecnologia Brasileira Ltda.', nome_fantasia: 'Aurora Tech', situacao: 'ATIVA', data_abertura: '2010-03-15', cnae_principal: '62.01-5-00 - Desenvolvimento de software', municipio: 'São Paulo', uf: 'SP' },
-  { cnpj: '98765432000110', razao_social: 'Construtora Nova Era S.A.', nome_fantasia: 'Nova Era Engenharia', situacao: 'ATIVA', data_abertura: '2005-07-22', cnae_principal: '41.20-4-00 - Construcao de edificios', municipio: 'Rio de Janeiro', uf: 'RJ' },
-  { cnpj: '45678901000123', razao_social: 'Comercial Alimenta Brasil Ltda.', nome_fantasia: 'Alimenta Brasil', situacao: 'ATIVA', data_abertura: '2018-01-10', cnae_principal: '46.39-7-01 - Comercio atacadista de alimentos', municipio: 'Belo Horizonte', uf: 'MG' },
-  { cnpj: '78901234000156', razao_social: 'Transportes Rota Certa Eireli', nome_fantasia: 'Rota Certa Logistica', situacao: 'ATIVA', data_abertura: '2012-09-05', cnae_principal: '49.30-2-02 - Transporte rodoviario de carga', municipio: 'Curitiba', uf: 'PR' },
-  { cnpj: '32165498000177', razao_social: 'Grafica Expresso Digital Ltda.', nome_fantasia: 'Expresso Digital', situacao: 'SUSPENSA', data_abertura: '2016-04-18', cnae_principal: '18.12-6-01 - Impressao de material grafico', municipio: 'Porto Alegre', uf: 'RS' },
-  { cnpj: '65498732000188', razao_social: 'Clinica Bem Estar S.S. Ltda.', nome_fantasia: 'Bem Estar Saude', situacao: 'ATIVA', data_abertura: '2019-11-30', cnae_principal: '86.30-5-03 - Atividade medica ambulatorial', municipio: 'Salvador', uf: 'BA' },
-  { cnpj: '14725836000199', razao_social: 'Tech Solutions Nordeste S.A.', nome_fantasia: 'TS Nordeste', situacao: 'ATIVA', data_abertura: '2014-06-20', cnae_principal: '62.09-1-00 - Suporte tecnico em TI', municipio: 'Recife', uf: 'PE' }
-];
-```
-
-- Resultado da busca exibido em card com: Razão Social, Nome Fantasia, Situação, Data de Abertura, CNAE, Município/UF
-- Feedback de erro com `aria-live="polite"` para CNPJ inválido, vazio ou não encontrado
-
-### Estilo visual
-- Design system com variáveis CSS custom properties no `:root`
-- Paleta: fundo claro `#f7f8fc`, texto `#101426`, primary `#2357ff`, secondary `#00a878`
-- **Glassmorphism:** cards com `backdrop-filter: blur(18px)`, `background: rgba(255,255,255,0.84)`, bordas sutis
-- **Dark mode** com `[data-theme="dark"]` — fundo `#080b14`, superfície `rgba(19,24,41,0.82)`, primary `#7593ff`
-- Toggle de tema com localStorage + `prefers-color-scheme`
-- Tipografia: Inter ou system-ui, headings com `letter-spacing: -0.055em`
-- Responsivo: container `max-width: 1180px`, breakpoints em 960px e 680px
-
-### SVG Icons inline (sem bibliotecas)
-Sol, Lua, Prédio, Busca, Escudo, Check, Seta direita — todos `stroke="currentColor"`, `fill="none"`, `viewBox="0 0 24 24"`
-
----
-
-## Etapa 3: Segurança e LGPD
-
-Antes de continuar, o Sage (QA-Engineer) deve auditar o HTML e encontrar vulnerabilidades. Corrija **todas** antes de prosseguir:
-
-1. **CRITICAL:** Zero `innerHTML` — usar `createTextNode` ou `Node.TEXT_NODE`
-2. **CRITICAL:** CSP via `<meta>` tag: `default-src 'none'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'`
-3. **HIGH:** Substituir qualquer CNPJ real por fictício (mock database acima)
-4. **HIGH:** Frame-busting: `<script>if (top !== self) top.location = self.location;</script>`
-5. **MEDIUM:** Criar `privacidade.html`, `termos.html`, `lgpd.html` (páginas estáticas em `public/`)
-6. **MEDIUM:** Disclaimer mencionando uso de localStorage para tema
-
----
-
-## Etapa 4: Migração para React 18 + Vite 5
-
-```bash
-npm install react@18 react-dom@18
-npm install -D vite@5 @vitejs/plugin-react@4
-```
-
-### Estrutura de arquivos
-```
-src/
-├── main.jsx
-├── App.jsx + App.module.css
-├── components/
-│   ├── Nav.jsx + Nav.module.css
-│   ├── Hero.jsx + Hero.module.css
-│   ├── SearchCard.jsx + SearchCard.module.css
-│   ├── TrustStrip.jsx + TrustStrip.module.css
-│   ├── Features.jsx + Features.module.css
-│   ├── HowItWorks.jsx + HowItWorks.module.css
-│   ├── Pricing.jsx + Pricing.module.css
-│   ├── CtaSection.jsx + CtaSection.module.css
-│   ├── Disclaimer.jsx + Disclaimer.module.css
-│   ├── Footer.jsx + Footer.module.css
-│   └── Icons.jsx
-├── hooks/
-│   ├── useTheme.js
-│   └── useCnpjSearch.js
-└── styles/
-    └── global.css
-```
-
-### Regras técnicas
-- **CSS Modules** com `localsConvention: 'camelCase'` no `vite.config.js`
-- **Sem `dangerouslySetInnerHTML`** — usar `document.createTextNode` onde necessário
-- **Sem `useEffect` para o tema** — inicializar o estado com leitura síncrona de localStorage + matchMedia
-- `vite.config.js` com `base: './'` para caminhos relativos no build
-- `index.html` como entry point Vite com `<div id="root">` + CSP meta tag
-
----
-
-## Etapa 5: Testes E2E com Playwright
-
-```bash
-npm install -D @playwright/test@1.45
-npx playwright install chromium
-```
-
-Arquivo `playwright.config.js`:
-```js
-import { defineConfig } from '@playwright/test';
-export default defineConfig({
-  testDir: 'e2e',
-  webServer: { command: 'npm run dev', port: 5173, reuseExistingServer: true },
-  use: { baseURL: 'http://localhost:5173' },
-});
-```
-
-Arquivo `e2e/landing.spec.js` com **20 testes:**
-
-### Renderização (5)
-1. Página carrega com título "CNPJ Fácil"
-2. Hero section visível
-3. Seção de Features visível
-4. Seção de Pricing visível
-5. TrustStrip com "50 mi+" visível
-
-### Busca de CNPJ (4)
-6. CNPJ válido (12345678000190) retorna dados da Aurora Tech
-7. CNPJ inválido (dígito verificador errado) mostra mensagem de erro
-8. CNPJ vazio mostra mensagem de validação
-9. CNPJ com formato incorreto (letras) mostra erro
-
-### Dark mode (3)
-10. Botão de toggle alterna data-theme no `<html>`
-11. Tema persiste no localStorage após toggle
-12. Tema respeita `prefers-color-scheme: dark` na primeira visita
-
-### Acessibilidade (3)
-13. Campo de busca tem label associada
-14. Resultado usa aria-live para feedback
-15. Botão de tema tem aria-label
-
-### Responsividade (3)
-16. Layout mobile (375px) não quebra
-17. Layout tablet (768px) funcional
-18. Layout desktop (1280px) completo
-
-### Segurança (2)
-19. CSP meta tag presente no `<head>`
-20. Script frame-busting presente no `<body>`
-
----
-
-## Etapa 6: Release
-
-```bash
-npm run build        # Deve gerar dist/ com ~52KB gzip
-npm test             # 20/20 passando
-```
-
-- Criar `CHANGELOG.md`
-- Tag `v1.0.0`
-- `npm pack` gera `consulta-cnpj-1.0.0.tgz`
-
----
-
-## Etapa 7: Assinatura AI Workflow Kit
-
-```bash
-npx ai-workflow doctor          # Deve retornar PASS 11/11
-npx ai-workflow collect-evidence --mode=full --task=cnpj-facil-landing
-```
-
-Adicionar no Footer o badge:
-```html
-<a href="https://ai-workflow-kit-site.pages.dev/" target="_blank" rel="noopener noreferrer">
-  Desenvolvido com AI Workflow Kit
-</a>
-```
-
----
-
-## Etapa 8: Cloudflare Pages
-
-Criar `public/_headers`:
-```
-/*
-  X-Frame-Options: DENY
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: strict-origin-when-cross-origin
-  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
-  Content-Security-Policy: default-src 'none'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none';
-
-/assets/*
-  Cache-Control: public, max-age=31536000, immutable
-```
-
-Deploy no Cloudflare Pages:
-- Conectar repositório GitHub
-- Branch: `main`
-- Build command: `npm run build`
-- Output directory: `dist`
-
----
-
-## Etapa 9: Documentação
-
-Criar `README.md` com:
-- Nome do projeto e link publicado
-- Stack utilizada
-- Como rodar localmente (clone, install, dev, build, test)
-- Estrutura de diretórios
-- Como editar e criar sua própria versão
-- Badge AI Workflow Kit
-
----
-
-## Exemplo visual de referência
-
-O resultado final deve ser visualmente idêntico ao publicado em https://cnpj-facil.pages.dev/
-
-Características visuais:
-- Nav com glassmorphism, sticky no topo
-- Hero com gradiente radial no fundo, headline grande (clamp 2.1rem → 3.7rem)
-- Cards com borda sutil, sombra suave, cantos arredondados (16px a 32px)
-- Input de busca com ícone, borda arredondada, foco com outline primary
-- Tabela de preços com 3 colunas, destaque central "MAIS POPULAR" com badge
-- Footer com linha separadora, links discretos, badge do AI Workflow Kit
-- Transições suaves em hover (transform, box-shadow, color)
-- Dark mode com cores invertidas mantendo contraste adequado
-
----
-
-## Validação final
-
-Antes de considerar concluído, todos estes comandos devem passar:
-
-```bash
-npm run build          # 0 erros
-npm test               # 20 passed
-npx ai-workflow doctor # 11/11 PASS
-```
-
-E o site deve estar acessível publicamente com:
-- HTTP 200 em `/`, `/privacidade.html`, `/termos.html`, `/lgpd.html`
-- Headers CSP, X-Frame-Options, HSTS presentes
-- Badge "Desenvolvido com AI Workflow Kit" no rodapé
+- **Código:** repositório Git com histórico limpo, branch `main` limpa, tag `v1.0.0`.
+- **Build:** diretório `dist/` funcional servido estaticamente.
+- **Documentação:** README explicando como clonar, instalar, rodar e editar o projeto.
+- **Deploy:** site acessível publicamente em URL estática (Cloudflare Pages ou equivalente).
+- **Headers HTTP de segurança:** CSP, X-Frame-Options, X-Content-Type-Options, HSTS, Referrer-Policy.
+- **Crédito:** link visível no rodapé apontando para https://ai-workflow-kit-site.pages.dev/ com o texto "Desenvolvido com AI Workflow Kit".
+- **Evidência:** o projeto deve estar assinado com AI Workflow Kit (`ai-workflow doctor` passa em todos os checks).
+- **Rastreabilidade:** documentação do processo de desenvolvimento (decisões, validações, auditoria de segurança).
