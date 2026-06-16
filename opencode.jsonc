@@ -1,0 +1,208 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "Atlas",
+  "agent": {
+    "Atlas": {
+      "mode": "primary",
+      "description": "Router and workflow coordinator for AI Workflow Kit",
+      "prompt": "{file:./.ai-workflow/opencode/agents/atlas.md}"
+    },
+    "Nexus": {
+      "mode": "primary",
+      "description": "Discovery, requirement, scope, and specification owner",
+      "prompt": "{file:./.ai-workflow/opencode/agents/nexus.md}"
+    },
+    "Orion": {
+      "mode": "primary",
+      "description": "Planning, PR sequencing, release, and deployment strategy owner",
+      "prompt": "{file:./.ai-workflow/opencode/agents/orion.md}"
+    },
+    "Astra": {
+      "mode": "primary",
+      "description": "Implementation owner for incremental, scoped changes",
+      "prompt": "{file:./.ai-workflow/opencode/agents/astra.md}"
+    },
+    "Sage": {
+      "mode": "primary",
+      "description": "Audit, validation, evidence, and quality gate owner",
+      "prompt": "{file:./.ai-workflow/opencode/agents/sage.md}"
+    },
+    "Phoenix": {
+      "mode": "primary",
+      "description": "Remediation and regression recovery owner",
+      "prompt": "{file:./.ai-workflow/opencode/agents/phoenix.md}"
+    },
+    "Architecture-Specialist": {
+      "mode": "subagent",
+      "description": "Select the simplest architecture that safely satisfies current requirements",
+      "prompt": "{file:./.ai-workflow/opencode/skills/architecture/SKILL.md}"
+    },
+    "Backend-Engineer": {
+      "mode": "subagent",
+      "description": "Support safe PHP/Node/Python backend changes for APIs and persistence",
+      "prompt": "{file:./.ai-workflow/opencode/skills/backend-development/SKILL.md}"
+    },
+    "Deployment-Specialist": {
+      "mode": "subagent",
+      "description": "Plan, review, or validate deployment, release, and production-readiness",
+      "prompt": "{file:./.ai-workflow/opencode/skills/deployment/SKILL.md}"
+    },
+    "Design-Specialist": {
+      "mode": "subagent",
+      "description": "Apply practical design principles to keep solutions simple and maintainable",
+      "prompt": "{file:./.ai-workflow/opencode/skills/design-principles/SKILL.md}"
+    },
+    "Docs-Engineer": {
+      "mode": "subagent",
+      "description": "Write or improve project documentation, READMEs, guides, and prompts",
+      "prompt": "{file:./.ai-workflow/opencode/skills/documentation/SKILL.md}"
+    },
+    "Frontend-Engineer": {
+      "mode": "subagent",
+      "description": "Implement or review frontend changes involving UI, state, routing, and accessibility",
+      "prompt": "{file:./.ai-workflow/opencode/skills/frontend-development/SKILL.md}"
+    },
+    "Full-Stack-Engineer": {
+      "mode": "subagent",
+      "description": "Coordinate frontend and backend changes as one coherent, testable increment",
+      "prompt": "{file:./.ai-workflow/opencode/skills/full-stack-development/SKILL.md}"
+    },
+    "Token-Economist": {
+      "mode": "subagent",
+      "description": "Reduce context size while preserving information required for safe execution",
+      "prompt": "{file:./.ai-workflow/opencode/skills/optimize-tokens/SKILL.md}"
+    },
+    "PR-Manager": {
+      "mode": "subagent",
+      "description": "Plan, implement, review, or validate small pull requests while preserving scope",
+      "prompt": "{file:./.ai-workflow/opencode/skills/pr-workflow/SKILL.md}"
+    },
+    "Discovery-Analyst": {
+      "mode": "subagent",
+      "description": "Clarify ambiguous requests into actionable problem statements and success outcomes",
+      "prompt": "{file:./.ai-workflow/opencode/skills/product-discovery/SKILL.md}"
+    },
+    "Product-Planner": {
+      "mode": "subagent",
+      "description": "Turn clarified needs into scoped requirements with acceptance-ready outcomes",
+      "prompt": "{file:./.ai-workflow/opencode/skills/product-planning/SKILL.md}"
+    },
+    "Memory-Guardian": {
+      "mode": "subagent",
+      "description": "Manage discoverable project memory for durable decisions and recurring corrections",
+      "prompt": "{file:./.ai-workflow/opencode/skills/project-memory/SKILL.md}"
+    },
+    "Prompt-Engineer": {
+      "mode": "subagent",
+      "description": "Expert in creating and refining prompts for AI agents and workflows",
+      "prompt": "{file:./.ai-workflow/opencode/skills/prompt-engineer/SKILL.md}"
+    },
+    "QA-Engineer": {
+      "mode": "subagent",
+      "description": "Design, review, or improve tests, acceptance criteria, and validation evidence",
+      "prompt": "{file:./.ai-workflow/opencode/skills/qa-workflow/SKILL.md}"
+    },
+    "Refactoring-Specialist": {
+      "mode": "subagent",
+      "description": "Improve code/document structure safely while preserving behavior",
+      "prompt": "{file:./.ai-workflow/opencode/skills/refactoring/SKILL.md}"
+    },
+    "Release-Specialist": {
+      "mode": "subagent",
+      "description": "Prepare release readiness decisions with explicit gates and evidence",
+      "prompt": "{file:./.ai-workflow/opencode/skills/release-workflow/SKILL.md}"
+    },
+    "SDD-Specialist": {
+      "mode": "subagent",
+      "description": "Convert approved requirements into explicit, testable specification artifacts",
+      "prompt": "{file:./.ai-workflow/opencode/skills/spec-driven-development/SKILL.md}"
+    },
+    "Technical-Leader": {
+      "mode": "subagent",
+      "description": "Make technical decisions, review architecture, and identify trade-offs",
+      "prompt": "{file:./.ai-workflow/opencode/skills/technical-leadership/SKILL.md}"
+    },
+    "UI-UX-Engineer": {
+      "mode": "subagent",
+      "description": "Improve usability and interface clarity without introducing unnecessary complexity",
+      "prompt": "{file:./.ai-workflow/opencode/skills/ui-ux-design/SKILL.md}"
+    }
+  },
+  "skills": {
+    "paths": [
+      "./.ai-workflow/opencode/skills"
+    ]
+  },
+  "command": {
+    "atlas": {
+      "description": "Decide safest next step and delegate to the appropriate workflow or agent",
+      "agent": "Atlas",
+      "template": "{file:./.ai-workflow/opencode/commands/atlas.md}"
+    },
+    "run": {
+      "description": "Execute the master orchestration pipeline (Gates, SDD, Implementation, Validation, Healing)",
+      "agent": "Atlas",
+      "template": "{file:./.ai-workflow/opencode/commands/run.md}"
+    },
+    "discover": {
+      "description": "Understand the project, gather context, and create initial documentation",
+      "agent": "Nexus",
+      "template": "{file:./.ai-workflow/opencode/commands/discover.md}"
+    },
+    "spec-create": {
+      "description": "Create a clear specification before implementation",
+      "agent": "Nexus",
+      "template": "{file:./.ai-workflow/opencode/commands/spec-create.md}"
+    },
+    "spec-review": {
+      "description": "Review a specification and validate scope, risks, criteria, and gaps",
+      "agent": "Nexus",
+      "template": "{file:./.ai-workflow/opencode/commands/spec-review.md}"
+    },
+    "spec-implement": {
+      "description": "Implement an approved specification incrementally",
+      "agent": "Astra",
+      "template": "{file:./.ai-workflow/opencode/commands/spec-implement.md}"
+    },
+    "plan": {
+      "description": "Plan a task or change, defining steps, risks, and validation",
+      "agent": "Orion",
+      "template": "{file:./.ai-workflow/opencode/commands/plan.md}"
+    },
+    "implement": {
+      "description": "Implement a small task with defined scope",
+      "agent": "Astra",
+      "template": "{file:./.ai-workflow/opencode/commands/implement.md}"
+    },
+    "validate": {
+      "description": "Run project validations and collect evidence",
+      "agent": "Sage",
+      "template": "{file:./.ai-workflow/opencode/commands/validate.md}"
+    },
+    "audit": {
+      "description": "Audit the project, identify issues, and suggest prioritized improvements",
+      "agent": "Sage",
+      "template": "{file:./.ai-workflow/opencode/commands/audit.md}"
+    },
+    "optimize-tokens": {
+      "description": "Analyze workflow and context usage; suggest reductions without losing quality or evidence",
+      "agent": "Sage",
+      "template": "{file:./.ai-workflow/opencode/commands/optimize-tokens.md}"
+    },
+    "update-memory": {
+      "description": "Update durable project memory with relevant decisions, constraints, and reusable context",
+      "agent": "Nexus",
+      "template": "{file:./.ai-workflow/opencode/commands/update-memory.md}"
+    },
+    "release": {
+      "description": "Prepare delivery with commit, push, PR/merge readiness, changelog, and evidence",
+      "agent": "Orion",
+      "template": "{file:./.ai-workflow/opencode/commands/release.md}"
+    },
+    "deploy": {
+      "description": "Publish the project to the defined environment after validation and release readiness",
+      "agent": "Orion",
+      "template": "{file:./.ai-workflow/opencode/commands/deploy.md}"
+    }
+  }
+}

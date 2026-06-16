@@ -1,0 +1,18 @@
+# BEGIN AI WORKFLOW KIT
+# AI Workflow Kit generated files
+.ai-workflow-backups/
+.ai-workflow/
+opencode
+opencode.jsonc.backup.*
+opencode/
+# END AI WORKFLOW KIT
+
+# Build artifacts
+dist/
+node_modules/
+test-results/
+EVIDENCE.json
+
+# Playwright
+playwright-report/
+
